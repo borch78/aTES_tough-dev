@@ -1,0 +1,14 @@
+{
+  "id": 9078,
+  "owner": "built-in",
+  "name": "68f55b28-7380-46b1-9bde-64fe1576e3b3",
+  "createdTime": "2022-01-01T01:03:42+08:00",
+  "organization": "built-in",
+  "clientIp": "159.89.126.192",
+  "user": "popug",
+  "method": "POST",
+  "requestUri": "/api/add-application",
+  "action": "login",
+  "isTriggered": false,
+  "object": "{\"owner\":\"admin\",\"name\":\"application_123\",\"organization\":\"built-in\",\"createdTime\":\"2022-01-01T01:03:42+08:00\",\"displayName\":\"New Application - 123\",\"logo\":\"https://cdn.casbin.org/img/casdoor-logo_1185x256.png\",\"enablePassword\":true,\"enableSignUp\":true,\"enableSigninSession\":false,\"enableCodeSignin\":false,\"enableSamlCompress\":false}"
+}
