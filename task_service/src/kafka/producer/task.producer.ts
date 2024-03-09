@@ -12,8 +12,8 @@ export class TaskProducer extends ProducerService {
             topic: 'task.waterfall.assign',
             messages: tasks.map((item) => ({
                 value: JSON.stringify({
-                    id: item.id,
-                    executorId: item.id,
+                    taskId: item.id,
+                    executorId: item.executorId,
                 })
             }))
         }
@@ -25,9 +25,8 @@ export class TaskProducer extends ProducerService {
             topic: 'task.waterfall.status',
             messages: [{
                 value: JSON.stringify({
-                    id: task.id,
-                    executorId: task.id,
-                    status: TaskStatus.Complete,
+                    taskId: task.id,
+                    executorId: task.executorId,
                 })
             }]
         }
