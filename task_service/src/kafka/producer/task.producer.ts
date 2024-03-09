@@ -2,7 +2,7 @@ import {Task, TaskStatus} from "../../entities/task";
 import {ProducerService} from "./producer.service";
 import {ProducerRecord} from "kafkajs";
 
-export class AssignProducer extends ProducerService {
+export class TaskProducer extends ProducerService {
     constructor() {
         super()
     }

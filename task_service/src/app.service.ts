@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Task, TaskStatus } from './entities/task';
 import { Repository } from 'typeorm';
 import { Executor } from './entities/executor';
-import {AssignProducer} from "./kafka/producer/assign.producer";
+import {TaskProducer} from "./kafka/producer/task.producer";
 
 @Injectable()
 export class AppService {
@@ -11,7 +11,7 @@ export class AppService {
     @InjectRepository(Executor)
     private executorsRepository: Repository<Executor>,
     @InjectRepository(Task) private tasksRepository: Repository<Task>,
-    private producer: AssignProducer,
+    private producer: TaskProducer,
   ) {}
   async createTask(data): Promise<Task> {
     const task = new Task();
