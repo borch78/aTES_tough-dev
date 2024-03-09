@@ -5,16 +5,16 @@ import { Executor } from '../../entities/executor';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class AuthConsumer implements OnModuleInit {
+export class UserConsumer implements OnModuleInit {
   constructor(
       private readonly consumerService: ConsumerService,
       @InjectRepository(Executor)
       private executorsRepository: Repository<Executor>,
   ) {}
 
-  async onModuleInit() {
+  async onModuleInit(){
     await this.consumerService.consume(
-        { topics: ['users'] },
+        { topics: ['user.signup'] },
         {
           eachMessage: async ({ topic, partition, message }) => {
             console.log({
