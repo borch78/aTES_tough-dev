@@ -6,7 +6,7 @@ export enum TaskStatus {
   Complete = 'complete',
 }
 
-@Entity()
+@Entity('tasks')
 export class Task {
   @PrimaryGeneratedColumn()
   id: number;

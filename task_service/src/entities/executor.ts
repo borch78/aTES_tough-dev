@@ -1,7 +1,7 @@
 import {Entity, Column, PrimaryColumn, OneToMany} from 'typeorm';
 import {Task} from "./task";
 
-@Entity()
+@Entity('executors')
 export class Executor {
   @PrimaryColumn({ type: 'uuid' })
   id: string;
