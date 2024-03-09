@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  casdoor:
+    container_name: casdoor
+    hostname: casdoor-app
+    image: casbin/casdoor-all-in-one
+    ports:
+      - '8000:8000'
+    networks:
+      - casdoor-net
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+
+networks:
+  casdoor-net:
+    driver: bridge
+  kafka-net:
+    external: true
+    name: kafka_kafka-net
