@@ -3,22 +3,24 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { KafkaModule } from './kafka/kafka.module';
-import { AuthConsumer } from './kafka/auth.consumer';
+import {Executor} from "./entities/executor";
+import {Task} from "./entities/task";
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
+      host: 'localhost',
       port: 5432,
-      username: 'user',
-      password: 'password',
-      database: 'db',
-      entities: ["src/**/*.entity{.ts,.js}"],
+      username: 'postgres',
+      password: 'postgres',
+      database: 'tasks',
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Executor, Task]),
     KafkaModule,
   ],
+  providers: [AppService],
   controllers: [AppController],
-  providers: [AppService, AuthConsumer, ],
 })
 export class AppModule {}
