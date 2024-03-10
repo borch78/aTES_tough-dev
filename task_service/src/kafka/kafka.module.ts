@@ -5,9 +5,10 @@ import {TaskProducer} from "./producer/task.producer";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {Executor} from "../entities/executor";
 import {UserConsumer} from "./consumers/user.consumer";
+import {MessageJornal} from "../entities/message-jornal";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Executor])],
+  imports: [TypeOrmModule.forFeature([Executor, MessageJornal])],
   providers: [ConsumerService, ProducerService, UserConsumer, TaskProducer],
   exports: [ConsumerService, ProducerService, UserConsumer, TaskProducer],
 })
