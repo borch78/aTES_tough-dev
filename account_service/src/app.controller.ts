@@ -15,5 +15,8 @@ export class AppController {
     return this.appService.getLogs(ownerId);
   }
 
-
+  @Get('analytic')
+  getAnalyticData() {
+    return this.appService.getAnalytic()
+  }
 }

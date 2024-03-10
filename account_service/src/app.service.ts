@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import {Account} from "./entities/account";
-import {Repository, MoreThan} from "typeorm";
+import {Repository, MoreThan, LessThan} from "typeorm";
 import {InjectRepository} from "@nestjs/typeorm";
 import {OperationsLog} from "./entities/operations-log";
 import {PayoutProducer} from "./kafka/producer/payout.producer";
+import {TaskCost} from "./entities/task-cost";
 
 @Injectable()
 export class AppService {
@@ -12,6 +13,8 @@ export class AppService {
       private accountsRepository: Repository<Account>,
       @InjectRepository(OperationsLog)
       private logsRepository: Repository<OperationsLog>,
+      @InjectRepository(TaskCost)
+      private taskCostRepository: Repository<TaskCost>,
       private readonly payoutProducer: PayoutProducer
   ) {
   }
@@ -21,6 +24,28 @@ export class AppService {
   async getLogs(ownerId: string) {
     const account = await this.accountsRepository.findOne({ where: { ownerId } });
     return account?.logs ?? [];
+  }
+
+  async getAnalytic() {
+    const todayTasks = await this.taskCostRepository.find({
+      where: {
+        createdAt: Date.now().toString()
+      }
+    })
+    let assignedTaskSum = 0;
+    let completedTaskSum = 0;
+    for (const task of todayTasks) {
+      if (task.isDone) {
+        completedTaskSum = completedTaskSum + task.cost;
+        continue;
+      }
+      assignedTaskSum = assignedTaskSum + task.cost;
+    }
+    const countNegativeBalancePopug = await this.accountsRepository.count({ where: { balance: LessThan(0) } })
+    return {
+      income: assignedTaskSum - completedTaskSum,
+      countNegativeBalancePopug
+    }
   }
 
   @Cron('* * 23 * * *')

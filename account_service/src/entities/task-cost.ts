@@ -11,6 +11,6 @@ export class TaskCost {
   @Column({ name: 'is_done', default: false })
   isDone: boolean = false;
 
-  @Column({ type: 'timestamp' })
-  createdAt: Date = new Date();
+  @Column({ type: 'timestamp', default: Date.now().toString() })
+  createdAt: string;
 }
