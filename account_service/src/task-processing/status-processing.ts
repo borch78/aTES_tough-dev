@@ -20,6 +20,7 @@ export class StatusProcessing {
         const account = await this.accountsRepository.findOne({ where: { ownerId: message.executorId } });
         account.balance = account.balance + (Math.random() * (40 - 20) + 20);
         await this.accountsRepository.save(account);
+        await this.taskCostRepository.update(message.taskId, { isDone: true } )
 
         await this.makeCompleteLog(account.id, message.taskId);
     }

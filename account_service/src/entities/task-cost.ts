@@ -8,6 +8,9 @@ export class TaskCost {
   @Column()
   cost: number;
 
+  @Column({ name: 'is_done', default: false })
+  isDone: boolean = false;
+
   @Column({ type: 'timestamp' })
   createdAt: Date = new Date();
 }

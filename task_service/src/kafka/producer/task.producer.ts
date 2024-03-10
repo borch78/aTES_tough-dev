@@ -1,4 +1,4 @@
-import {Task, TaskStatus} from "../../entities/task";
+import {Task} from "../../entities/task";
 import {ProducerService} from "./producer.service";
 import {ProducerRecord} from "kafkajs";
 import {Injectable} from "@nestjs/common";
@@ -42,12 +42,11 @@ export class TaskProducer extends ProducerService {
         const message = new MessageJornal()
         try {
             const record: ProducerRecord = {
-                topic: 'task.waterfall.status',
+                topic: 'task.waterfall.status.complete',
                 messages: [{
                     value: JSON.stringify({
                         taskId: task.id,
                         executorId: task.executorId,
-                        status: TaskStatus.Complete,
                     })
                 }]
             }
