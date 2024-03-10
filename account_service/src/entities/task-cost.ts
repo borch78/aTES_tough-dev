@@ -7,4 +7,7 @@ export class TaskCost {
 
   @Column()
   cost: number;
+
+  @Column({ type: 'timestamp' })
+  createdAt: Date = new Date();
 }

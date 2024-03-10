@@ -12,7 +12,7 @@ export class OperationsLog {
   @Column({ type: 'jsonb' })
   message: string;
 
-  @Column({ type: 'uuid' })
+  @Column({ type: 'timestamp' })
   createdAt: Date = new Date();
 
   @ManyToOne(() => Account, (account) => account.id)
