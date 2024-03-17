@@ -19,7 +19,7 @@ export class AppService {
     task.executorId = data.executorId;
     task.status = TaskStatus.WIP;
     const result = await this.tasksRepository.save(task);
-    await this.producer.completeTask(result);
+    await this.producer.createTask(result);
     return result;
   }
 

@@ -14,7 +14,7 @@ export class UserConsumer implements OnModuleInit {
 
   async onModuleInit(){
     await this.consumerService.consume(
-        { topics: ['user.signup'] },
+        { topics: ['v1.user'] },
         {
           eachMessage: async ({ topic, partition, message }) => {
             console.log({

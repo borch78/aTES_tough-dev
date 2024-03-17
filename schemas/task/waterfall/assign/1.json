@@ -1,0 +1,8 @@
+{
+  "id": "/task.waterfall.assign",
+  "type": "object",
+  "properties": {
+    "taskId": {"type":"string"},
+    "executorId": {"type":"string"}
+  }
+}
