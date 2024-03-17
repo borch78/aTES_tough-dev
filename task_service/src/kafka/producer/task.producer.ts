@@ -19,7 +19,7 @@ export class TaskProducer extends ProducerService {
         const message = new MessageJornal()
         try {
             const record: ProducerRecord = {
-                topic: 'task.waterfall.assign',
+                topic: 'v1.task.waterfall.assign',
                 messages: tasks.map((item) => ({
                     value: JSON.stringify({
                         taskId: item.id,
@@ -38,11 +38,34 @@ export class TaskProducer extends ProducerService {
         }
     }
 
+    async createTask(task: Task): Promise<void> {
+        const message = new MessageJornal()
+        try {
+            const record: ProducerRecord = {
+                topic: 'v1.task.waterfall.create',
+                messages: [{
+                    value: JSON.stringify({
+                        taskId: task.id,
+                        executorId: task.executorId,
+                    })
+                }]
+            }
+
+            message.message = JSON.stringify(record)
+            await this.produce(record)
+            message.isSend = true;
+        } catch (e) {
+            console.log('Error during send message', e)
+        } finally {
+            this.messageJornalRepository.save(message)
+        }
+    }
+
     async completeTask(task: Task): Promise<void> {
         const message = new MessageJornal()
         try {
             const record: ProducerRecord = {
-                topic: 'task.waterfall.complete',
+                topic: 'v1.task.waterfall.complete',
                 messages: [{
                     value: JSON.stringify({
                         taskId: task.id,
