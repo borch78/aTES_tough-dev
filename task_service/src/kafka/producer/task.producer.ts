@@ -42,7 +42,7 @@ export class TaskProducer extends ProducerService {
         const message = new MessageJornal()
         try {
             const record: ProducerRecord = {
-                topic: 'task.waterfall.status.complete',
+                topic: 'task.waterfall.complete',
                 messages: [{
                     value: JSON.stringify({
                         taskId: task.id,
