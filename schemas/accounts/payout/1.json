@@ -1,0 +1,9 @@
+{
+  "id": "/accounts.payout.assign",
+  "type": "object",
+  "properties": {
+    "accountId": {"type":"string"},
+    "ownerId": {"type":"string"},
+    "balance": {"type":"number"}
+  }
+}

@@ -19,7 +19,7 @@ export class PayoutProducer extends ProducerService {
         const message = new MessageJornal()
         try {
             const record: ProducerRecord = {
-                topic: 'accounts.payout',
+                topic: 'v1.accounts.payout',
                 messages: accounts.map((item) => ({
                     value: JSON.stringify({
                         accountId: item.id,

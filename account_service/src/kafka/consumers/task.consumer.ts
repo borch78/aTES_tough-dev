@@ -20,7 +20,7 @@ export class TaskConsumer implements OnModuleInit {
 
   async onModuleInit() {
     await this.consumerService.consume(
-        { topics: ['task.waterfall.assign', 'task.waterfall.status.complete'] },
+        { topics: ['v1.task.waterfall.assign', 'v1.task.waterfall.complete', 'v1.task.waterfall.create'] },
         {
           eachMessage: async ({ topic, partition, message }) => {
             console.log({
